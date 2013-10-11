@@ -13,7 +13,7 @@ Rectangle {
 		rows:2
 		Repeater {
 			model: 9
-			Train { image:"loco%1.png".arg(index+1) }
+			Train { image:"loco%1.png".arg(index+1); sound: "train.wav" }
 		}
 	}
 
