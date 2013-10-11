@@ -6,7 +6,8 @@ import QtMultimedia 5.0
 
 Rectangle {
 	id: train
-	height:80; width:160
+	height:imageID.sourceSize.height
+	width:imageID.sourceSize.width
 
 	property url image: "loco5.png"
 	property url sound: "train.wav"
@@ -14,6 +15,7 @@ Rectangle {
 	property bool clickable : true
 
 	Image {
+		id: imageID
 		anchors.fill:parent
 		source: train.image
 	}
