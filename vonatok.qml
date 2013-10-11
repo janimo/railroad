@@ -5,6 +5,13 @@ Rectangle {
 	height: 600
 	width: 1200
 
+	//Background image
+	Image {
+		width: parent.width
+		height: parent.height
+		source: "railroad-bg.svg"
+	}
+
 	//Show all locomotives
 	Grid {
 		id: locos
