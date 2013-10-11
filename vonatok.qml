@@ -9,7 +9,7 @@ Rectangle {
 	Image {
 		width: parent.width
 		height: parent.height
-		source: "railroad-bg.svg"
+		source: "assets/images/railroad-bg.svg"
 	}
 
 	//Station
@@ -36,10 +36,10 @@ Rectangle {
 	function initTrains() {
 		var t = []
 		for(var i=0;i<9;i++) {
-			t.push("loco%1.png".arg(i+1))
+			t.push("assets/images/loco%1.png".arg(i+1))
 		}
 		for(var i=0;i<14;i++) {
-			t.push("wagon%1.png".arg(i+1))
+			t.push("assets/images/wagon%1.png".arg(i+1))
 		}
 		return t
 	}
