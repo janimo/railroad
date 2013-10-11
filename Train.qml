@@ -9,10 +9,8 @@ Rectangle {
 	height:imageID.sourceSize.height
 	width:imageID.sourceSize.width
 
-	property url image: "loco5.png"
-	property url sound: "train.wav"
-
-	property bool clickable : true
+	property url image
+	property url sound
 
 	Image {
 		id: imageID
@@ -27,6 +25,6 @@ Rectangle {
 
 	MouseArea {
 		anchors.fill:parent
-		onClicked: if (parent.clickable) audio.play()
+		onClicked: if (parent.sound) audio.play()
 	}
 }
