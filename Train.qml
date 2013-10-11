@@ -8,6 +8,7 @@ Rectangle {
 	id: train
 	height:imageID.sourceSize.height
 	width:imageID.sourceSize.width
+	color:"transparent"
 
 	property url image
 	property url sound
