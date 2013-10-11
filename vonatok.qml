@@ -16,11 +16,10 @@ Rectangle {
 
 	Row {
 		spacing:5
-		Train { image:"loco2.png" }
-		Train { image:"loco3.png" }
-		Train { image:"loco4.png" }
-		Train { image:"loco5.png" }
-		Train { image:"loco6.png"; clickable:false}
+		Repeater {
+			model: 9
+			Train { image:"loco%1.png".arg(index+1) }
+		}
 	}
 
 	MouseArea {
