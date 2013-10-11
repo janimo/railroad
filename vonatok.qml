@@ -12,28 +12,37 @@ Rectangle {
 		source: "railroad-bg.svg"
 	}
 
-	//Show all locomotives
-	Grid {
-		id: locos
-		spacing:5
+	//Station
+	Row {
+		id: station
+		height: 130
+	}
+
+	property variant trains
+
+	//Depot
+	Grid  {
+		id: depot
+		anchors.top: station.bottom
+		spacing: 25
 		columns: 5
-		rows:2
+		rows: 5
 		Repeater {
-			model: 9
-			Train { image:"loco%1.png".arg(index+1); sound: "train.wav" }
+			model: trains.length
+			Train { image: trains[index] }
 		}
 	}
 
-	//Show all wagons
-	Grid {
-		id: wagons
-		anchors.top: locos.bottom
-		spacing:5
-		columns: 5
-		rows:3
-		Repeater {
-			model: 14
-			Train { image:"wagon%1.png".arg(index+1) }
+	function initTrains() {
+		var t = []
+		for(var i=0;i<9;i++) {
+			t.push("loco%1.png".arg(i+1))
 		}
+		for(var i=0;i<14;i++) {
+			t.push("wagon%1.png".arg(i+1))
+		}
+		return t
 	}
+
+	Component.onCompleted: trains = initTrains()
 }
