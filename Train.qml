@@ -10,6 +10,7 @@ Rectangle {
 	width:imageID.sourceSize.width
 	color:"transparent"
 
+	signal clicked
 	property url image
 	property url sound
 
@@ -26,6 +27,6 @@ Rectangle {
 
 	MouseArea {
 		anchors.fill:parent
-		onClicked: if (parent.sound) audio.play()
+		onClicked: train.clicked()
 	}
 }
