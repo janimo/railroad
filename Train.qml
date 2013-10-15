@@ -17,7 +17,17 @@ Rectangle {
 	}
 
 	MouseArea {
+		id: mouseArea
 		anchors.fill:parent
 		onClicked: train.clicked()
+	}
+
+	states: State {
+		name: "pressed"
+		when: mouseArea.pressed
+		PropertyChanges {
+			target: train
+			opacity: 0.4
+		}
 	}
 }
