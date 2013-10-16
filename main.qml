@@ -2,6 +2,9 @@ import QtQuick 2.0
 import QtMultimedia 5.0
 
 Rectangle {
+	property int nLoco: 9
+	property int nWag:14
+
 	height: 600
 	width: 1200
 
@@ -15,7 +18,14 @@ Rectangle {
 	//Station
 	Row {
 		id: station
-		height: 130
+		height: parent.height/5
+	}
+
+	function addToStation(index) {
+		var component = Qt.createComponent("Train.qml");
+		var object = component.createObject(station, {
+					image : trains[index]
+		})
 	}
 
 	property variant trains
@@ -29,20 +39,27 @@ Rectangle {
 		rows: 5
 		Repeater {
 			model: trains.length
-			Train { image: trains[index] }
+			Train {
+				image: trains[index]
+				onClicked: addToStation(index)
+			}
 		}
+	}
+
+	function newGame() {
+		trains = initTrains()
 	}
 
 	function initTrains() {
 		var t = []
-		for(var i=0;i<9;i++) {
+		for(var i=0;i<nLoco;i++) {
 			t.push("assets/images/loco%1.png".arg(i+1))
 		}
-		for(var i=0;i<14;i++) {
+		for(var i=0;i<nWag;i++) {
 			t.push("assets/images/wagon%1.png".arg(i+1))
 		}
 		return t
 	}
 
-	Component.onCompleted: trains = initTrains()
+	Component.onCompleted: newGame()
 }
