@@ -34,6 +34,7 @@ Rectangle {
 	//Depot
 	Rectangle  {
 		id: depot
+		visible: false
 		anchors.top: station.bottom
 		Repeater {
 			model: trains.length
@@ -72,6 +73,12 @@ Rectangle {
 	function newGame() {
 		trains = initTrains()
 		showTrain();
+		timer.start()
+		trainSound.play()
+	}
+
+	function startGame() {
+		depot.visible = true
 	}
 
 	function initTrains() {
@@ -83,6 +90,17 @@ Rectangle {
 			t.push("assets/images/wagon%1.png".arg(i+1))
 		}
 		return t
+	}
+
+	Timer {
+		id: timer
+		interval: 3000
+		onTriggered: startGame()
+	}
+
+	Audio {
+		id: trainSound
+		source: "assets/sounds/train.wav"
 	}
 
 	Component.onCompleted: newGame()
