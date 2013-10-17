@@ -35,7 +35,10 @@ Rectangle {
 	Rectangle  {
 		id: depot
 		visible: false
+		color:"transparent"
 		anchors.top: station.bottom
+		height: 19*parent.height/25
+		width: parent.width
 		Repeater {
 			model: trains.length
 			Train {
@@ -44,7 +47,7 @@ Rectangle {
 						addToStation(trains[index])
 				}
 				x: (index % 5) * 230 + 30
-				y: Math.floor(index / 5) * 100 + 30
+				y: parent.height/5 * (Math.floor(index/5) + 1) - height
 			}
 		}
 	}
