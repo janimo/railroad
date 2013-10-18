@@ -7,12 +7,12 @@ Rectangle {
 	color:"transparent"
 
 	signal clicked
-	property url image
+	property string name
 
 	Image {
 		id: imageID
 		anchors.fill:parent
-		source: train.image
+		source: "assets/images/"+train.name
 	}
 
 	MouseArea {

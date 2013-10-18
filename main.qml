@@ -24,7 +24,7 @@ Rectangle {
 	function addToStation(img) {
 		var component = Qt.createComponent("Train.qml");
 		var object = component.createObject(station, {
-					image : img
+					name : img
 		})
 		object.anchors.bottom = station.bottom
 		object.clicked.connect(function() {object.destroy()})
@@ -44,7 +44,7 @@ Rectangle {
 		Repeater {
 			model: trains.length
 			Train {
-				image: trains[index]
+				name: trains[index]
 				onClicked: {
 						addToStation(trains[index])
 				}
@@ -61,10 +61,10 @@ Rectangle {
 		var t = []
 		for (var i=0;i<wagons;i++) {
 			var nw = Math.floor(Math.random()*nWag)
-			t.push("assets/images/wagon%1.png".arg(nw+1))
+			t.push("wagon%1.png".arg(nw+1))
 		}
 		var nl = Math.floor(Math.random()*nLoco)
-		t.push("assets/images/loco%1.png".arg(nl+1))
+		t.push("loco%1.png".arg(nl+1))
 		return t
 	}
 
@@ -89,10 +89,10 @@ Rectangle {
 	function initTrains() {
 		var t = []
 		for(var i=0;i<nLoco;i++) {
-			t.push("assets/images/loco%1.png".arg(i+1))
+			t.push("loco%1.png".arg(i+1))
 		}
 		for(var i=0;i<nWag;i++) {
-			t.push("assets/images/wagon%1.png".arg(i+1))
+			t.push("wagon%1.png".arg(i+1))
 		}
 		return t
 	}
