@@ -26,6 +26,7 @@ Rectangle {
 		var object = component.createObject(station, {
 					image : img
 		})
+		object.anchors.bottom = station.bottom
 	}
 
 	property variant trains
