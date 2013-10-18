@@ -2,9 +2,15 @@ import QtQuick 2.0
 import QtMultimedia 5.0
 
 Rectangle {
-	property int nLoco: 9
-	property int nWag:14
 
+	//Total number of locomotives
+	property int nLoco: 9
+	//Total number of wagons
+	property int nWag:14
+	//Number of wagons in current train
+	property int difficulty: 1
+
+	//Window dimensions
 	height: 600
 	width: 1200
 
@@ -15,7 +21,7 @@ Rectangle {
 		source: "assets/images/railroad-bg.svg"
 	}
 
-	//Station
+	//Station at the top of the screen
 	Row {
 		id: station
 		height: parent.height/5
@@ -30,9 +36,11 @@ Rectangle {
 			if (newTrain[i] != station.children[i].name)
 				return false
 		}
-		return true
+		difficulty++
+		newGame()
 	}
 
+	//Add a new wagon/locomotive to the station at the front of the current train
 	function addToStation(img) {
 		var component = Qt.createComponent("Train.qml");
 		var object = component.createObject(station, {
@@ -73,32 +81,40 @@ Rectangle {
 		if (wagons == undefined) {
 			wagons = 1
 		}
-		var t = []
+		newTrain = []
 		for (var i=0;i<wagons;i++) {
 			var nw = Math.floor(Math.random()*nWag)
-			t.push("wagon%1.png".arg(nw+1))
+			newTrain.push("wagon%1.png".arg(nw+1))
 		}
 		var nl = Math.floor(Math.random()*nLoco)
-		t.push("loco%1.png".arg(nl+1))
-		return t
+		newTrain.push("loco%1.png".arg(nl+1))
 	}
 
 	function showTrain() {
-		newTrain = getRandomTrain(2)
+		getRandomTrain(difficulty)
 		for(var i=0;i<newTrain.length;i++) {
 			addToStation(newTrain[i]);
 		}
 	}
 
+	//Reinitialize game state
 	function newGame() {
-		trains = initTrains()
+		station.children = null
 		showTrain();
 		timer.start()
 		trainSound.play()
 	}
 
+	//Start constructing a train similar to the one shown
 	function startGame() {
+		station.children = null
 		depot.visible = true
+	}
+
+	//One time game initialization
+	function initGame() {
+		trains = initTrains()
+		newGame();
 	}
 
 	function initTrains() {
@@ -123,5 +139,5 @@ Rectangle {
 		source: "assets/sounds/train.wav"
 	}
 
-	Component.onCompleted: newGame()
+	Component.onCompleted: initGame();
 }
