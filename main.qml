@@ -6,7 +6,7 @@ Rectangle {
 	//Total number of locomotives
 	property int nLoco: 9
 	//Total number of wagons
-	property int nWag:14
+	property int nWag:13
 	//Number of wagons in current train
 	property int difficulty: 1
 
