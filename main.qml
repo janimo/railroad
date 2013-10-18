@@ -27,6 +27,7 @@ Rectangle {
 					image : img
 		})
 		object.anchors.bottom = station.bottom
+		object.clicked.connect(function() {object.destroy()})
 	}
 
 	property variant trains
