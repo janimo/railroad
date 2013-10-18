@@ -30,11 +30,11 @@ Rectangle {
 	//Check whether the currently built train matches the original
 	function checkMatch() {
 		if (station.children.length != newTrain.length)
-			return false;
+			return
 
 		for (var i = 0; i < newTrain.length; i++ ) {
 			if (newTrain[i] != station.children[i].name)
-				return false
+				return
 		}
 		difficulty++
 		newGame()
@@ -42,7 +42,7 @@ Rectangle {
 
 	//Add a new wagon/locomotive to the station at the front of the current train
 	function addToStation(img) {
-		var component = Qt.createComponent("Train.qml");
+		var component = Qt.createComponent("Train.qml")
 		var object = component.createObject(station, {
 					name : img
 		})
@@ -93,14 +93,14 @@ Rectangle {
 	function showTrain() {
 		getRandomTrain(difficulty)
 		for(var i=0;i<newTrain.length;i++) {
-			addToStation(newTrain[i]);
+			addToStation(newTrain[i])
 		}
 	}
 
 	//Reinitialize game state
 	function newGame() {
 		station.children = null
-		showTrain();
+		showTrain()
 		timer.start()
 		trainSound.play()
 	}
@@ -114,7 +114,7 @@ Rectangle {
 	//One time game initialization
 	function initGame() {
 		trains = initTrains()
-		newGame();
+		newGame()
 	}
 
 	function initTrains() {
@@ -130,7 +130,7 @@ Rectangle {
 
 	Timer {
 		id: timer
-		interval: 3000
+		interval: 6000
 		onTriggered: startGame()
 	}
 
