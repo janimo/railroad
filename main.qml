@@ -21,17 +21,31 @@ Rectangle {
 		height: parent.height/5
 	}
 
+	//Check whether the currently built train matches the original
+	function checkMatch() {
+		if (station.children.length != newTrain.length)
+			return false;
+
+		for (var i = 0; i < newTrain.length; i++ ) {
+			if (newTrain[i] != station.children[i].name)
+				return false
+		}
+		return true
+	}
+
 	function addToStation(img) {
 		var component = Qt.createComponent("Train.qml");
 		var object = component.createObject(station, {
 					name : img
 		})
 		object.anchors.bottom = station.bottom
-		object.clicked.connect(function() {object.destroy()})
+		object.clicked.connect(function() {object.parent = null; object.destroy();checkMatch()})
 	}
 
-	property variant trains
-	property variant newTrain
+	//All trains
+	property var trains: []
+	//The train to copy
+	property var newTrain: []
 
 	//Depot
 	Rectangle  {
@@ -47,6 +61,7 @@ Rectangle {
 				name: trains[index]
 				onClicked: {
 						addToStation(trains[index])
+						checkMatch()
 				}
 				x: (index % 5) * 230 + 30
 				y: parent.height/5 * (Math.floor(index/5) + 1) - height
