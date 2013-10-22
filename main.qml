@@ -36,8 +36,11 @@ Rectangle {
 			if (newTrain[i] != station.children[i].name)
 				return
 		}
+
+		//if we get here, the guess was correct
+		bonus.play()
 		difficulty++
-		newGame()
+		newgame.start()
 	}
 
 	//Add a new wagon/locomotive to the station at the front of the current train
@@ -134,9 +137,20 @@ Rectangle {
 		onTriggered: startGame()
 	}
 
+	Timer {
+		id: newgame
+		interval: 3000
+		onTriggered: newGame()
+	}
+
 	Audio {
 		id: trainSound
 		source: "assets/sounds/train.wav"
+	}
+
+	Audio {
+		id: bonus
+		source: "assets/sounds/bonus.wav"
 	}
 
 	Component.onCompleted: initGame();
