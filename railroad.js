@@ -40,7 +40,7 @@ function addToStation(img) {
 				name : img
 	})
 	object.anchors.bottom = station.bottom
-	object.clicked.connect(function() {object.parent = null; object.destroy();checkMatch()})
+	object.clicked.connect(function() {object.parent = null; object.destroy();removeSound.play();checkMatch()})
 }
 
 //Create a new train consisting of a locomotive and a given number of wagons randomly

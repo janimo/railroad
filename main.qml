@@ -104,6 +104,11 @@ Rectangle {
 	}
 
 	Audio {
+		id: removeSound
+		source: "assets/sounds/smudge.wav"
+	}
+
+	Audio {
 		id: bonusSound
 		source: "assets/sounds/bonus.wav"
 	}
