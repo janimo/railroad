@@ -3,10 +3,11 @@ import QtMultimedia 5.0
 
 Rectangle {
 
-	//Total number of locomotives
+	//Total number of locomotives and wagons.
+	//TODO: autodetect by looking into assets folder, so it can be easily customized
 	property int nLoco: 9
-	//Total number of wagons
 	property int nWag:13
+
 	//Number of wagons in current train
 	property int difficulty: 1
 
@@ -38,9 +39,9 @@ Rectangle {
 		}
 
 		//if we get here, the guess was correct
-		bonus.play()
+		bonusSound.play()
 		difficulty++
-		newgame.start()
+		newGameTimer.start()
 	}
 
 	//Add a new wagon/locomotive to the station at the front of the current train
@@ -104,7 +105,7 @@ Rectangle {
 	function newGame() {
 		station.children = null
 		showTrain()
-		timer.start()
+		startGameTimer.start()
 		trainSound.play()
 	}
 
@@ -132,13 +133,13 @@ Rectangle {
 	}
 
 	Timer {
-		id: timer
+		id: startGameTimer
 		interval: 6000
 		onTriggered: startGame()
 	}
 
 	Timer {
-		id: newgame
+		id: newGameTimer
 		interval: 3000
 		onTriggered: newGame()
 	}
@@ -149,7 +150,7 @@ Rectangle {
 	}
 
 	Audio {
-		id: bonus
+		id: bonusSound
 		source: "assets/sounds/bonus.wav"
 	}
 
