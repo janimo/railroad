@@ -33,6 +33,7 @@ Rectangle {
 	Row {
 		id: station
 		height: parent.height/5
+		visible: ! demoStation.visible
 
 		transform: Scale {
 			id: stationScale
@@ -72,7 +73,7 @@ Rectangle {
 	//Depot
 	Rectangle  {
 		id: depot
-		visible: false
+		visible: ! demoStation.visible
 		color:"transparent"
 		anchors.top: station.bottom
 		height: 19*parent.height/25

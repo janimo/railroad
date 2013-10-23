@@ -67,7 +67,8 @@ function createTrain() {
 }
 
 function animateTrain() {
-	depot.visible = false
+	demoStation.x = 0
+	demoStation.visible = true
 	startGameTimer.start()
 	trainSound.play()
 }
@@ -75,14 +76,13 @@ function animateTrain() {
 //Reinitialize game state
 function newGame() {
 	station.children = null
-	demoStation.x = 0
 	createTrain()
 	animateTrain()
 }
 
 //Start constructing a train similar to the one shown
 function guessTrain() {
-	depot.visible = true
+	demoStation.visible = false
 }
 
 //One time game initialization
