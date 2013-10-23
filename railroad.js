@@ -25,6 +25,15 @@ function checkMatch() {
 }
 
 //Add a new wagon/locomotive to the station at the front of the current train
+function addToDemoStation(img) {
+	var component = Qt.createComponent("Train.qml")
+	var object = component.createObject(demoStation, {
+				name : img
+	})
+	object.anchors.bottom = demoStation.bottom
+}
+
+//Add a new wagon/locomotive to the station at the front of the current train
 function addToStation(img) {
 	var component = Qt.createComponent("Train.qml")
 	var object = component.createObject(station, {
@@ -49,26 +58,30 @@ function getRandomTrain(wagons) {
 }
 
 //Show a new train in the station
-function showTrain() {
+function createTrain() {
 	getRandomTrain(difficulty)
+	demoStation.children = null
 	for(var i=0;i<newTrain.length;i++) {
-		addToStation(newTrain[i])
+		addToDemoStation(newTrain[i])
 	}
+}
+
+function animateTrain() {
+	depot.visible = false
+	startGameTimer.start()
+	trainSound.play()
 }
 
 //Reinitialize game state
 function newGame() {
 	station.children = null
-	depot.visible = false
-	showTrain()
-	startGameTimer.start()
-	trainSound.play()
+	demoStation.x = 0
+	createTrain()
+	animateTrain()
 }
 
 //Start constructing a train similar to the one shown
-function startGame() {
-	station.children = null
-	station.x = 0
+function guessTrain() {
 	depot.visible = true
 }
 

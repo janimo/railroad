@@ -15,9 +15,9 @@ Rectangle {
 		source: "assets/images/railroad-bg.svg"
 	}
 
-	//Station at the top of the screen
+	//Station at the top of the screen showing the moving train
 	Row {
-		id: station
+		id: demoStation
 		height: parent.height/5
 
 		NumberAnimation on x {
@@ -25,8 +25,14 @@ Rectangle {
 			to: 1200
 			duration: 15000
 			easing.type: Easing.InQuad
-			onStopped: Railroad.startGame()
+			onStopped: Railroad.guessTrain()
 		}
+	}
+
+	//Station at the top of the screen
+	Row {
+		id: station
+		height: parent.height/5
 
 		transform: Scale {
 			id: stationScale
