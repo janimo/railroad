@@ -15,6 +15,37 @@ Rectangle {
 		source: "assets/images/railroad-bg.svg"
 	}
 
+	//Animate again button
+	Rectangle {
+		Image {
+			width: parent.width
+			height: parent.height
+			source: "assets/images/reload.png"
+		}
+
+		id: button
+		width: 64
+		height: width
+		x: parent.width - width - 10
+		y: 10
+		color: "transparent"
+
+		MouseArea {
+			id: buttonMouseArea
+			anchors.fill:parent
+			onClicked: if (!stationAnimation.running) Railroad.animateTrain()
+		}
+
+		states: State {
+			name: "disabled"
+			when: stationAnimation.running
+			PropertyChanges {
+				target: button
+				opacity: 0.4
+			}
+		}
+	}
+
 	//Station at the top of the screen showing the moving train
 	Row {
 		id: demoStation
