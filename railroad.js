@@ -59,6 +59,7 @@ function showTrain() {
 //Reinitialize game state
 function newGame() {
 	station.children = null
+	depot.visible = false
 	showTrain()
 	startGameTimer.start()
 	trainSound.play()
