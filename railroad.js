@@ -1,5 +1,13 @@
 // Most of the game logic is here
 
+//Total number of locomotives and wagons.
+//TODO: autodetect by looking into assets folder, so it can be easily customized
+var nLoco = 9
+var nWag = 13
+
+//Number of wagons in current train
+var difficulty = 1
+
 //Check whether the currently built train matches the original
 function checkMatch() {
 	if (station.children.length != newTrain.length)
@@ -26,6 +34,7 @@ function addToStation(img) {
 	object.clicked.connect(function() {object.parent = null; object.destroy();checkMatch()})
 }
 
+//Create a new train consisting of a locomotive and a given number of wagons randomly
 function getRandomTrain(wagons) {
 	if (wagons == undefined) {
 		wagons = 1
@@ -39,6 +48,7 @@ function getRandomTrain(wagons) {
 	newTrain.push("loco%1.png".arg(nl+1))
 }
 
+//Show a new train in the station
 function showTrain() {
 	getRandomTrain(difficulty)
 	for(var i=0;i<newTrain.length;i++) {
@@ -66,6 +76,8 @@ function initGame() {
 	newGame()
 }
 
+//Init the array of locomotive and wagon names
+//TODO: init depot dynamically
 function initTrains() {
 	var t = []
 	for(var i=0;i<nLoco;i++) {

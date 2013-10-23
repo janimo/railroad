@@ -4,14 +4,6 @@ import "railroad.js" as Railroad
 
 Rectangle {
 
-	//Total number of locomotives and wagons.
-	//TODO: autodetect by looking into assets folder, so it can be easily customized
-	property int nLoco: 9
-	property int nWag:13
-
-	//Number of wagons in current train
-	property int difficulty: 1
-
 	//Window dimensions
 	height: 600
 	width: 1200
