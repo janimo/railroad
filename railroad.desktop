@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Railroad memory game
+Comment=GCompris railroad activity clone
+Exec=qmlscene main.qml
+Icon=assets/images/railroad.svg
+Terminal=false
+X-Ubuntu-Touch=true
+X-Ubuntu-StageHint=SideStage

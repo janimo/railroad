@@ -1,0 +1,14 @@
+{
+	"name": "com.ubuntu.developer.jani.monoses.railroad",
+	"description": "Memory game. A simple QML clone of the GCompris railroad activity.",
+	"maintainer": "Jani Monoses <jani@ubuntu.com",
+	"framework": "ubuntu-sdk-13.10",
+	"hooks": {
+		"railroad": {
+			"apparmor": "apparmor/railroad.json",
+			"desktop": "railroad.desktop"
+		}
+	},
+	"title": "Railroad Memory Game",
+	"version": "0.1"
+}
