@@ -91,3 +91,6 @@ function initTrains() {
 	return t
 }
 
+function keypress(event) {
+	if (event.key == Qt.Key_Q) Qt.quit();
+}

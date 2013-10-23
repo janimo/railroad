@@ -101,5 +101,8 @@ Rectangle {
 		source: "assets/sounds/bonus.wav"
 	}
 
+	focus: true
+	Keys.onPressed: Railroad.keypress(event)
+
 	Component.onCompleted: Railroad.initGame();
 }
