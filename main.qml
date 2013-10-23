@@ -104,6 +104,11 @@ Rectangle {
 	}
 
 	Audio {
+		id: addSound
+		source: "assets/sounds/bleep.wav"
+	}
+
+	Audio {
 		id: removeSound
 		source: "assets/sounds/smudge.wav"
 	}
