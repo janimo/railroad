@@ -19,6 +19,43 @@ Rectangle {
 	Row {
 		id: station
 		height: parent.height/5
+
+		NumberAnimation on x {
+			id: stationAnimation
+			to: 1200
+			duration: 15000
+			easing.type: Easing.InQuad
+			onStopped: Railroad.startGame()
+		}
+
+		transform: Scale {
+			id: stationScale
+			property real scale: 1
+			origin.x: 250
+			origin.y: 60
+			xScale: scale
+			yScale: scale
+		}
+
+		SequentialAnimation {
+			id: bonusAnimation
+			loops: 3
+			PropertyAnimation {
+				target: stationScale
+				property: "scale"
+				from: 1.0
+				to: 1.3
+				duration:500
+			}
+			PropertyAnimation {
+				target: stationScale
+				property: "scale"
+				from: 1.3
+				to: 1.0
+				duration: 500
+			}
+			onStopped: Railroad.newGame()
+		}
 	}
 
 	//All trains
@@ -54,12 +91,6 @@ Rectangle {
 		onTriggered: stationAnimation.start()
 	}
 
-	Timer {
-		id: newGameTimer
-		interval: 5000
-		onTriggered: Railroad.newGame()
-	}
-
 	Audio {
 		id: trainSound
 		source: "assets/sounds/train.wav"
@@ -68,17 +99,6 @@ Rectangle {
 	Audio {
 		id: bonusSound
 		source: "assets/sounds/bonus.wav"
-	}
-
-	PropertyAnimation {
-		id: stationAnimation
-		target: station
-		property: "x"
-		from: 0
-		to: 1200
-		duration: 15000
-		easing.type: Easing.InQuad
-		onStopped: Railroad.startGame()
 	}
 
 	Component.onCompleted: Railroad.initGame();

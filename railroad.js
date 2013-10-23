@@ -20,8 +20,8 @@ function checkMatch() {
 
 	//if we get here, the guess was correct
 	bonusSound.play()
+	bonusAnimation.start()
 	difficulty++
-	newGameTimer.start()
 }
 
 //Add a new wagon/locomotive to the station at the front of the current train
