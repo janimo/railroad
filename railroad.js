@@ -67,6 +67,7 @@ function newGame() {
 //Start constructing a train similar to the one shown
 function startGame() {
 	station.children = null
+	station.x = 0
 	depot.visible = true
 }
 

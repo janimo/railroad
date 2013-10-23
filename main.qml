@@ -50,13 +50,13 @@ Rectangle {
 
 	Timer {
 		id: startGameTimer
-		interval: 6000
-		onTriggered: Railroad.startGame()
+		interval: 3000
+		onTriggered: stationAnimation.start()
 	}
 
 	Timer {
 		id: newGameTimer
-		interval: 3000
+		interval: 5000
 		onTriggered: Railroad.newGame()
 	}
 
@@ -68,6 +68,17 @@ Rectangle {
 	Audio {
 		id: bonusSound
 		source: "assets/sounds/bonus.wav"
+	}
+
+	PropertyAnimation {
+		id: stationAnimation
+		target: station
+		property: "x"
+		from: 0
+		to: 1200
+		duration: 15000
+		easing.type: Easing.InQuad
+		onStopped: Railroad.startGame()
 	}
 
 	Component.onCompleted: Railroad.initGame();
