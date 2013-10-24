@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtMultimedia 5.0
+import Ubuntu.Components 0.1
 
 import "railroad.js" as Railroad
 
@@ -14,135 +15,141 @@ Rectangle {
 	height: 600
 	width: 1200
 
-	//Background image
-	Image {
-		width: parent.width
-		height: parent.height
-		source: "assets/images/railroad-bg.svg"
-	}
+	//Provide the ability to force orientation to landscape
+	OrientationHelper {
 
-	//Animate again button
-	Rectangle {
+		orientationAngle: 0
+
+		//Background image
 		Image {
 			width: parent.width
 			height: parent.height
-			source: "assets/images/reload.png"
+			source: "assets/images/railroad-bg.svg"
 		}
 
-		id: button
-		width: 64
-		height: width
-		x: parent.width - width - 10
-		y: 10
-		color: "transparent"
-
-		MouseArea {
-			id: buttonMouseArea
-			anchors.fill:parent
-			onClicked: if (!stationAnimation.running) Railroad.animateTrain()
-		}
-
-		states: State {
-			name: "disabled"
-			when: stationAnimation.running
-			PropertyChanges {
-				target: button
-				opacity: 0.4
+		//Animate again button
+		Rectangle {
+			Image {
+				width: parent.width
+				height: parent.height
+				source: "assets/images/reload.png"
 			}
-		}
-	}
 
-	//Sound on/off button
+			id: button
+			width: 64
+			height: width
+			x: parent.width - width - 10
+			y: 10
+			color: "transparent"
 
-	Rectangle {
-		id: soundButton
-		Image {
-			width: parent.width
-			height: parent.height
-			source: "assets/images/sound_%1.png".arg(mainWindow.soundMuted ? "off" : "on")
-		}
-
-		width: 64
-		height: width
-		x: parent.width - width - 84
-		y: 10
-		color: "transparent"
-
-		MouseArea {
-			id: soundButtonMouseArea
-			anchors.fill:parent
-			onClicked: mainWindow.soundMuted = ! mainWindow.soundMuted
-		}
-	}
-
-	//Station at the top of the screen showing the moving train
-	Row {
-		id: demoStation
-		height: parent.height/5
-
-		NumberAnimation on x {
-			id: stationAnimation
-			to: 1200
-			duration: 15000
-			easing.type: Easing.InQuad
-			onStopped: Railroad.guessTrain()
-		}
-	}
-
-	//Station at the top of the screen
-	Row {
-		id: station
-		height: parent.height/5
-		visible: ! demoStation.visible
-
-		transform: Scale {
-			id: stationScale
-			property real scale: 1
-			origin.x: 250
-			origin.y: 60
-			xScale: scale
-			yScale: scale
-		}
-
-		SequentialAnimation {
-			id: bonusAnimation
-			loops: 3
-			PropertyAnimation {
-				target: stationScale
-				property: "scale"
-				from: 1.0
-				to: 1.3
-				duration:500
+			MouseArea {
+				id: buttonMouseArea
+				anchors.fill:parent
+				onClicked: if (!stationAnimation.running) Railroad.animateTrain()
 			}
-			PropertyAnimation {
-				target: stationScale
-				property: "scale"
-				from: 1.3
-				to: 1.0
-				duration: 500
-			}
-			onStopped: Railroad.newGame()
-		}
-	}
 
-	//Depot
-	Rectangle  {
-		id: depot
-		visible: ! demoStation.visible
-		color:"transparent"
-		anchors.top: station.bottom
-		height: 19*parent.height/25
-		width: parent.width
-		Repeater {
-			model: trains.length
-			Train {
-				name: trains[index]
-				onClicked: {
-						Railroad.addToStation(trains[index])
-						Railroad.checkMatch()
+			states: State {
+				name: "disabled"
+				when: stationAnimation.running
+				PropertyChanges {
+					target: button
+					opacity: 0.4
 				}
-				x: (index % 5) * 230 + 30
-				y: parent.height/5 * (Math.floor(index/5) + 1) - height
+			}
+		}
+
+		//Sound on/off button
+
+		Rectangle {
+			id: soundButton
+			Image {
+				width: parent.width
+				height: parent.height
+				source: "assets/images/sound_%1.png".arg(mainWindow.soundMuted ? "off" : "on")
+			}
+
+			width: 64
+			height: width
+			x: parent.width - width - 84
+			y: 10
+			color: "transparent"
+
+			MouseArea {
+				id: soundButtonMouseArea
+				anchors.fill:parent
+				onClicked: mainWindow.soundMuted = ! mainWindow.soundMuted
+			}
+		}
+
+		//Station at the top of the screen showing the moving train
+		Row {
+			id: demoStation
+			height: parent.height/5
+
+			NumberAnimation on x {
+				id: stationAnimation
+				to: 1200
+				duration: 15000
+				easing.type: Easing.InQuad
+				onStopped: Railroad.guessTrain()
+			}
+		}
+
+		//Station at the top of the screen
+		Row {
+			id: station
+			height: parent.height/5
+			visible: ! demoStation.visible
+
+			transform: Scale {
+				id: stationScale
+				property real scale: 1
+				origin.x: 250
+				origin.y: 60
+				xScale: scale
+				yScale: scale
+			}
+
+			SequentialAnimation {
+				id: bonusAnimation
+				loops: 3
+				PropertyAnimation {
+					target: stationScale
+					property: "scale"
+					from: 1.0
+					to: 1.3
+					duration:500
+				}
+				PropertyAnimation {
+					target: stationScale
+					property: "scale"
+					from: 1.3
+					to: 1.0
+					duration: 500
+				}
+				onStopped: Railroad.newGame()
+			}
+		}
+
+		//Depot
+		Rectangle  {
+			id: depot
+			visible: ! demoStation.visible
+			color:"transparent"
+			anchors.top: station.bottom
+			height: 19*parent.height/25
+			width: parent.width
+			Repeater {
+				model: trains.length
+				Train {
+					name: trains[index]
+					onClicked: {
+							Railroad.addToStation(trains[index])
+							Railroad.checkMatch()
+					}
+					x: (index % 5) * 230 + 30
+					y: parent.height/5 * (Math.floor(index/5) + 1) - height
+				}
 			}
 		}
 	}
