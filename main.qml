@@ -176,6 +176,7 @@ Rectangle {
 		id: trainSound
 		source: "assets/sounds/train.wav"
 		muted: mainWindow.soundMuted
+		volume: 0.25
 	}
 
 	Audio {
