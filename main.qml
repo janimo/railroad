@@ -46,6 +46,29 @@ Rectangle {
 		}
 	}
 
+	//Sound on/off button
+
+	Rectangle {
+		id: soundButton
+		Image {
+			width: parent.width
+			height: parent.height
+			source: "assets/images/sound_%1.png".arg(soundMuted ? "off" : "on")
+		}
+
+		width: 64
+		height: width
+		x: parent.width - width - 84
+		y: 10
+		color: "transparent"
+
+		MouseArea {
+			id: soundButtonMouseArea
+			anchors.fill:parent
+			onClicked: soundMuted = ! soundMuted
+		}
+	}
+
 	//Station at the top of the screen showing the moving train
 	Row {
 		id: demoStation
@@ -129,24 +152,31 @@ Rectangle {
 		onTriggered: stationAnimation.start()
 	}
 
+	//Sound on/off
+	property bool soundMuted: false
+
 	Audio {
 		id: trainSound
 		source: "assets/sounds/train.wav"
+		muted: soundMuted
 	}
 
 	Audio {
 		id: addSound
 		source: "assets/sounds/bleep.wav"
+		muted: soundMuted
 	}
 
 	Audio {
 		id: removeSound
 		source: "assets/sounds/smudge.wav"
+		muted: soundMuted
 	}
 
 	Audio {
 		id: bonusSound
 		source: "assets/sounds/bonus.wav"
+		muted: soundMuted
 	}
 
 	focus: true
