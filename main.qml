@@ -1,10 +1,14 @@
 import QtQuick 2.0
 import QtMultimedia 5.0
+
 import "railroad.js" as Railroad
 
 Rectangle {
 
 	id: mainWindow
+
+	//All trains
+	property var trains: []
 
 	//Window dimensions
 	height: 600
@@ -120,9 +124,6 @@ Rectangle {
 			onStopped: Railroad.newGame()
 		}
 	}
-
-	//All trains
-	property var trains: []
 
 	//Depot
 	Rectangle  {
