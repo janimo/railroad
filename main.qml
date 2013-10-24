@@ -27,7 +27,7 @@ Rectangle {
 	//Provide the ability to force orientation to landscape
 	OrientationHelper {
 
-		orientationAngle: args.values.rotate
+		orientationAngle: args.values.rotate ? args.values.rotate : 0
 
 		//Background image
 		Image {
