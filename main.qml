@@ -121,8 +121,6 @@ Rectangle {
 
 	//All trains
 	property var trains: []
-	//The train to copy
-	property var newTrain: []
 
 	//Depot
 	Rectangle  {

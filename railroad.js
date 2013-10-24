@@ -8,6 +8,9 @@ var nWag = 13
 //Number of wagons in current train
 var difficulty = 1
 
+//The train to copy
+var newTrain = []
+
 //Check whether the currently built train matches the original
 function checkMatch() {
 	if (station.children.length != newTrain.length)
