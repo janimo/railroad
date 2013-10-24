@@ -4,6 +4,8 @@ import "railroad.js" as Railroad
 
 Rectangle {
 
+	id: mainWindow
+
 	//Window dimensions
 	height: 600
 	width: 1200
@@ -53,7 +55,7 @@ Rectangle {
 		Image {
 			width: parent.width
 			height: parent.height
-			source: "assets/images/sound_%1.png".arg(soundMuted ? "off" : "on")
+			source: "assets/images/sound_%1.png".arg(mainWindow.soundMuted ? "off" : "on")
 		}
 
 		width: 64
@@ -65,7 +67,7 @@ Rectangle {
 		MouseArea {
 			id: soundButtonMouseArea
 			anchors.fill:parent
-			onClicked: soundMuted = ! soundMuted
+			onClicked: mainWindow.soundMuted = ! mainWindow.soundMuted
 		}
 	}
 
@@ -156,25 +158,25 @@ Rectangle {
 	Audio {
 		id: trainSound
 		source: "assets/sounds/train.wav"
-		muted: soundMuted
+		muted: mainWindow.soundMuted
 	}
 
 	Audio {
 		id: addSound
 		source: "assets/sounds/bleep.wav"
-		muted: soundMuted
+		muted: mainWindow.soundMuted
 	}
 
 	Audio {
 		id: removeSound
 		source: "assets/sounds/smudge.wav"
-		muted: soundMuted
+		muted: mainWindow.soundMuted
 	}
 
 	Audio {
 		id: bonusSound
 		source: "assets/sounds/bonus.wav"
-		muted: soundMuted
+		muted: mainWindow.soundMuted
 	}
 
 	focus: true
