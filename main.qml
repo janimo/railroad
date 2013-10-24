@@ -15,10 +15,19 @@ Rectangle {
 	height: 600
 	width: 1200
 
+	Arguments {
+		id: args
+		Argument {
+			name: "rotate"
+			required: false
+			valueNames: ["ANGLE"]
+		}
+	}
+
 	//Provide the ability to force orientation to landscape
 	OrientationHelper {
 
-		orientationAngle: 0
+		orientationAngle: args.values.rotate
 
 		//Background image
 		Image {
@@ -190,5 +199,5 @@ Rectangle {
 	focus: true
 	Keys.onPressed: Railroad.keypress(event)
 
-	Component.onCompleted: Railroad.initGame();
+	Component.onCompleted: Railroad.initGame()
 }
