@@ -5,7 +5,7 @@
 var nLoco = 9
 var nWag = 13
 
-// Current difficulty level.
+//Current difficulty level.
 var difficulty = 0
 
 //The train to copy
@@ -73,6 +73,7 @@ function createTrain() {
 function animateTrain() {
 	demoStation.x = 0
 	demoStation.visible = true
+	stationAnimation.duration = [15000, 10000, 8000][difficulty % 3]
 	startGameTimer.start()
 	trainSound.play()
 }
