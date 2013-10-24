@@ -5,8 +5,8 @@
 var nLoco = 9
 var nWag = 13
 
-//Number of wagons in current train
-var difficulty = 1
+// Current difficulty level.
+var difficulty = 0
 
 //The train to copy
 var newTrain = []
@@ -61,9 +61,9 @@ function getRandomTrain(wagons) {
 	newTrain.push("loco%1.png".arg(nl+1))
 }
 
-//Show a new train in the station
+//Show a new train in the station. The number of wagons is a function of the current difficulty
 function createTrain() {
-	getRandomTrain(difficulty)
+	getRandomTrain(Math.floor(difficulty/3) + 1)
 	demoStation.children = null
 	for(var i=0;i<newTrain.length;i++) {
 		addToDemoStation(newTrain[i])
