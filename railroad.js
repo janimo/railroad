@@ -14,6 +14,13 @@ var difficulty = 0
 //The train to copy
 var newTrain = []
 
+//The train was correctly reconstructed, go to next level
+function nextLevel() {
+	bonusSound.play()
+	bonusAnimation.start()
+	difficulty++
+}
+
 //Check whether the currently built train matches the original
 function checkMatch() {
 	if (station.children.length != newTrain.length)
@@ -25,9 +32,7 @@ function checkMatch() {
 	}
 
 	//if we get here, the guess was correct
-	bonusSound.play()
-	bonusAnimation.start()
-	difficulty++
+	nextLevel()
 }
 
 //Add a new wagon/locomotive to the station at the front of the current train
