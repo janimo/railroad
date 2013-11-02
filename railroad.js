@@ -14,11 +14,15 @@ var difficulty = 0
 //The train to copy
 var newTrain = []
 
+//During victory animation clicking is disabled
+var clickingEnabled = true
+
 //The train was correctly reconstructed, go to next level
 function nextLevel() {
 	bonusSound.play()
 	bonusAnimation.start()
 	difficulty++
+	clickingEnabled = false
 }
 
 //Check whether the currently built train matches the original
@@ -51,7 +55,7 @@ function addToStation(img) {
 				name : img
 	})
 	object.anchors.bottom = station.bottom
-	object.clicked.connect(function() {object.parent = null; object.destroy();removeSound.play();checkMatch()})
+	object.clicked.connect(function() {if (!clickingEnabled) return; object.parent = null; object.destroy();removeSound.play();checkMatch()})
 	addSound.play()
 }
 
@@ -94,6 +98,7 @@ function newGame() {
 	station.children = null
 	createTrain()
 	animateTrain()
+	clickingEnabled = true
 }
 
 //Start constructing a train similar to the one shown

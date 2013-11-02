@@ -153,8 +153,10 @@ Rectangle {
 				Train {
 					name: trains[index]
 					onClicked: {
-							Railroad.addToStation(trains[index])
-							Railroad.checkMatch()
+							if(Railroad.clickingEnabled) {
+								Railroad.addToStation(trains[index])
+								Railroad.checkMatch()
+							}
 					}
 					x: (index % 5) * 230 + 30
 					y: parent.height/5 * (Math.floor(index/5) + 1) - height
