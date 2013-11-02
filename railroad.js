@@ -5,6 +5,9 @@
 var nLoco = 9
 var nWag = 13
 
+//Number of wagons shown at maximum difficulty level
+var MAXWAGONS = 5
+
 //Current difficulty level.
 var difficulty = 0
 
@@ -51,6 +54,9 @@ function addToStation(img) {
 function getRandomTrain(wagons) {
 	if (wagons == undefined) {
 		wagons = 1
+	}
+	if (wagons > MAXWAGONS) {
+		wagons = MAXWAGONS
 	}
 	newTrain = []
 	for (var i=0;i<wagons;i++) {
